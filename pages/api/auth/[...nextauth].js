@@ -8,6 +8,23 @@ export default NextAuth({
             clientId: process.env.LINKEDIN_ID,
             clientSecret: process.env.LINKEDIN_SECRET,
             scope: ['r_emailaddress', 'r_liteprofile'],
+            profileUrl:
+                'GET https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))',
+            async profile(profile, tokens) {
+                console.log(profile)
+                const res = await fetch(
+                    `https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))&oauth2_access_token=${tokens.access_token}`
+                )
+                const data = await res.json()
+                console.log(data)
+                const email = data.elements[0]['handle~'].emailAddress
+                return {
+                    id: profile.id,
+                    name: profile.localizedFirstName + ' ' + profile.localizedLastName,
+                    email,
+                    image: profile.profilePicture.displayImage,
+                }
+            },
         }),
         Providers.Facebook({
             clientId: process.env.FACEBOOK_ID,
