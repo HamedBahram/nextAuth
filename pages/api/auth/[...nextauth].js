@@ -7,7 +7,7 @@ export default NextAuth({
         Providers.LinkedIn({
             clientId: process.env.LINKEDIN_ID,
             clientSecret: process.env.LINKEDIN_SECRET,
-            scope: ['r_liteprofile', 'r_emailaddress'],
+            scope: 'r_emailaddress',
         }),
         Providers.Facebook({
             clientId: process.env.FACEBOOK_ID,
