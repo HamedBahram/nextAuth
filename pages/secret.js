@@ -25,7 +25,7 @@ const SecretPage = () => {
     return (
         <div>
             <h1 className='text-2xl font-bold'>Protected Page</h1>
-            <p>{content}</p>
+            <p>{content ? content : 'Loading...'}</p>
         </div>
     )
 }
