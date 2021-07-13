@@ -9,7 +9,7 @@ export default NextAuth({
             clientSecret: process.env.LINKEDIN_SECRET,
             scope: ['r_emailaddress', 'r_liteprofile'],
             profileUrl:
-                'GET https://api.linkedin.com/v2/me?projection=(id,firstName,lastName,profilePicture(displayImage~:playableStreams))',
+                'GET https://api.linkedin.com/v2/me?projection=(id,localizedFirstName,localizedLastName,profilePicture(displayImage~:playableStreams))',
             async profile(profile, tokens) {
                 console.log(profile)
                 const res = await fetch(
