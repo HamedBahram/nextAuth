@@ -20,7 +20,7 @@ const HomePage = () => {
                         <p>Signed in as {session.user.email}</p>
                         <button
                             className='px-5 py-2 mt-2 bg-blue-500 rounded text-white uppercase text-sm font-medium tracking-wider focus:outline-none focus:ring focus:border-blue-300 focus:ring-offset-1'
-                            onClick={() => signOut()}
+                            onClick={() => signOut({ redirect: false })}
                         >
                             Sign Out
                         </button>
