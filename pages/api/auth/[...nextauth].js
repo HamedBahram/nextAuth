@@ -11,18 +11,17 @@ export default NextAuth({
             profileUrl:
                 'https://api.linkedin.com/v2/me?projection=(id,localizedFirstName,localizedLastName,profilePicture(displayImage~:playableStreams))',
             async profile(profile, tokens) {
-                console.log(profile)
+                console.log(profile.profilePicture['displayImage~'].elements)
                 const res = await fetch(
                     `https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))&oauth2_access_token=${tokens.access_token}`
                 )
                 const data = await res.json()
-                console.log(data)
                 const email = data.elements[0]['handle~'].emailAddress
                 return {
                     id: profile.id,
                     name: profile.localizedFirstName + ' ' + profile.localizedLastName,
                     email,
-                    image: profile.profilePicture.displayImage,
+                    image: profile.profilePicture['displayImage~'].elements,
                 }
             },
         }),
