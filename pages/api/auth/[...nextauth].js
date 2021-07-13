@@ -7,7 +7,7 @@ export default NextAuth({
         Providers.LinkedIn({
             clientId: process.env.LINKEDIN_ID,
             clientSecret: process.env.LINKEDIN_SECRET,
-            scope: ['r_emailaddress', 'r_liteprofile'],
+            scope: 'r_emailaddress r_liteprofile',
             profileUrl:
                 'GET https://api.linkedin.com/v2/me?projection=(id,localizedFirstName,localizedLastName,profilePicture(displayImage~:playableStreams))',
             async profile(profile, tokens) {
